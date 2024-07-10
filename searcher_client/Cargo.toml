@@ -17,15 +17,7 @@ solana-sdk = "=1.17.28"
 solana-client = "=1.17.28"
 solana-perf = "=1.17.28"
 solana-metrics = "=1.17.28"
-# solana-client = { git = "https://github.com/jito-foundation/jito-solana.git", tag = "v1.14.28-jito" }
-# solana-metrics = { git = "https://github.com/jito-foundation/jito-solana.git", tag = "v1.14.28-jito" }
-# solana-perf = { git = "https://github.com/jito-foundation/jito-solana.git", tag = "v1.14.28-jito" }
-# solana-sdk = { git = "https://github.com/jito-foundation/jito-solana.git", tag = "v1.14.28-jito" }
+
 thiserror = "1.0.39"
 tokio = { version = "1.14.1", features = ["full"] }
 tonic = { version = "0.8.0", features = ["tls"] }
-
-#indexmap = "1.9.3"
-
-
-
