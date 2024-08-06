@@ -104,19 +104,20 @@ where
         transactions: Vec<VersionedTransaction>,
         // Defines how many slots to lookahead for a jito-solana validator in order to
         // determine whether or not the bundle can be sent.
-        slot_lookahead: u64,
+        slot_lookahead: Option<u64>,
     ) -> SearcherClientResult<BundleId> {
-        let next_leader_slot = self
-            .cluster_data
-            .next_jito_validator()
-            .await
-            .ok_or(SearcherClientError::NoUpcomingJitoValidator)?
-            .1;
+        if let Some(slot_lookahead) = slot_lookahead {
+            let next_leader_slot = self
+                .cluster_data
+                .next_jito_validator()
+                .await
+                .ok_or(SearcherClientError::NoUpcomingJitoValidator)?
+                .1;
 
-        if next_leader_slot > slot_lookahead + self.cluster_data.current_slot().await {
-            return Err(SearcherClientError::NoUpcomingJitoValidator);
+            if next_leader_slot > slot_lookahead + self.cluster_data.current_slot().await {
+                return Err(SearcherClientError::NoUpcomingJitoValidator);
+            }
         }
-
         let resp = self
             .searcher_service_client
             .lock()
